@@ -28,7 +28,7 @@ internal class TextCalculator
                     break;
 
                 case FontCharacterData fontCharacter:
-                    length += char.IsAscii(fontCharacter.Character)?1:2;
+                    length += char.IsAscii(fontCharacter.Character) ? 1 : 2;
                     break;
             }
         }

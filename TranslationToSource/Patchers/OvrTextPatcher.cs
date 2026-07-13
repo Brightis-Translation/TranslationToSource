@@ -36,7 +36,7 @@ internal class OvrTextPatcher
                 SheetData = translation,
                 Patch = new OvrTextPatchInstructionsData
                 {
-                    Length = (_textCalculator.CalculateByteLength(patchText) + 3) & ~3,
+                    Length = _textCalculator.CalculateByteLength(patchText),
                     Instructions = patchInstructions.ToArray()
                 }
             });

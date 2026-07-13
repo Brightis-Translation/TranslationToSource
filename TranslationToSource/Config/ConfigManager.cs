@@ -51,7 +51,7 @@ namespace TranslationToSource.Config
         {
             string path = GetConfigPath();
             if (!File.Exists(path))
-                throw new FileNotFoundException($"Could not find config.json.");
+                throw new FileNotFoundException("Could not find config.json.");
 
             string json = File.ReadAllText(path);
 

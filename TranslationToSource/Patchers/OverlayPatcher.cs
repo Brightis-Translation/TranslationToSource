@@ -23,7 +23,6 @@ internal abstract class OverlayPatcher
             IList<CharacterData> originalCharacters = TextParser.Parse(orderedPatches[i].SheetData.OriginalText);
 
             int originalLength = TextCalculator.CalculateByteLength(originalCharacters);
-            originalLength = (originalLength + 3) & ~3;
 
             if (i == 0)
             {
