@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "TranslationToSource": {
+      "commandName": "Project"
+    }
+  }
+}
