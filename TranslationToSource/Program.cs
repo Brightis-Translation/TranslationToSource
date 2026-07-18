@@ -4,7 +4,6 @@ using GoogleSheetsApiV4.Contract.DataClasses;
 using TranslationToSource;
 using TranslationToSource.Config;
 using TranslationToSource.Models;
-using TranslationToSource.Models.Patchers;
 using TranslationToSource.Models.Sheets;
 using TranslationToSource.Patchers;
 using TranslationToSource.Sheets;
@@ -27,24 +26,8 @@ ISheetManager sheet = GoogleApiConnector.Instance.CreateSheetManager(ConfigManag
 
 foreach (OverlayConfigData config in OverlayConfigProvider.GetConfigs())
 {
-    string? source = null;
-    switch (config.OverlayMode)
-    {
-        case OvrMode.Inline:
-            var patcher = new OverlayInlinePatcher();
-            source = await patcher.Patch(sheet, config);
-            break;
-
-        case OvrMode.Pointer:
-            var patcher1 = new OverlayPointerPatcher();
-            source = await patcher1.Patch(sheet, config);
-            break;
-
-        case OvrMode.PointerExtension:
-            var patcher2 = new OverlayPointerExtensionPatcher();
-            source = await patcher2.Patch(sheet, config);
-            break;
-    }
+    var patcher = new OverlayPatcher();
+    var source = await patcher.Patch(sheet, config);
 
     if (source == null)
         continue;

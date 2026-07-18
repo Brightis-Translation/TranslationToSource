@@ -1,14 +1,47 @@
-﻿using TranslationToSource.Models.Patchers.Layout;
+﻿using GoogleSheetsApiV4.Contract;
 using TranslationToSource.Models.Patchers;
+using TranslationToSource.Models.Patchers.Layout;
+using TranslationToSource.Models.Sheets;
 using TranslationToSource.Models.Texts;
+using TranslationToSource.Patchers.Layout;
+using TranslationToSource.Source;
 using TranslationToSource.Texts;
 
 namespace TranslationToSource.Patchers;
 
-internal abstract class OverlayPatcher
+internal class OverlayPatcher
 {
     protected TextParser TextParser { get; } = new();
     protected TextCalculator TextCalculator { get; } = new();
+
+    public virtual async Task<string?> Patch(ISheetManager sheet, OverlayConfigData overlayConfig)
+    {
+        // Create text patches
+        var patcher = new OvrTextPatcher();
+        OvrPatchData? assemblyPatches = await patcher.CreatePatchDataAsync(sheet, overlayConfig);
+        if (assemblyPatches == null)
+            return null;
+
+        // Create text patches layout
+        List<OvrSectionData> sections = CreateSections(assemblyPatches);
+        AppendUnusedSpace(sections, assemblyPatches, overlayConfig.UseUnlimitedSpace);
+
+        var ovrPatchLayouter = new OvrPatchLayouter();
+        OvrPatchLayoutData? layout = ovrPatchLayouter.Create(assemblyPatches, sections);
+        if (layout == null)
+        {
+            Console.WriteLine("Text could not fit into the overlay!");
+            return null;
+        }
+
+        // Emit patch source
+        var sourceEmitter = new OverlayTextAssemblySourceEmitter();
+        //var sourceEmitter = new OverlayInlineAssemblySourceEmitter();
+        //var sourceEmitter = new OverlayPointerAssemblySourceEmitter();
+        string source = sourceEmitter.EmitTextPatchSource(layout, $"OVR\\{overlayConfig.OverlaySlot:000}.bin");
+
+        return source;
+    }
 
     protected List<OvrSectionData> CreateSections(OvrPatchData patchData)
     {

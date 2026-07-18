@@ -26,7 +26,7 @@ internal class OverlayPointerAssemblySourceEmitter : PsxAssemblySourceEmitter
             foreach (long dataOffset in textPatch.Patch.SheetData.DataOffsets)
             {
                 string offsetSource = Emit(new SourceOffsetInstruction(dataOffset));
-                string wordsSource = Emit(new WordsInstruction(new[] { textPatch.Offset }));
+                string wordsSource = Emit(new WordsInstruction([textPatch.Offset]));
 
                 result.AppendLine(offsetSource);
                 result.AppendLine($"\t{wordsSource}");

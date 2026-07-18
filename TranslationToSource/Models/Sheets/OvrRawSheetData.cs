@@ -16,4 +16,6 @@ internal class OvrRawSheetData
     public string OriginalText { get; set; }
     [Column("F")]
     public string? TranslatedText { get; set; }
+    [Column("H")]
+    public string? OverlayTextType { get; set; }
 }

@@ -12,16 +12,15 @@ internal class OverlayConfigData
     [JsonConverter(typeof(HexIntConverter))]
     public required int OverlayLength { get; set; }
     public required OvrType OverlayType { get; set; }
-    public required OvrMode OverlayMode { get; set; }
+    public required OverlayTextType OverlayTextType { get; set; }
+    public required bool UseUnlimitedSpace { get; set; }
     [JsonConverter(typeof(HexLongConverter))]
     public long? PopupJalOffset { get; set; }
 }
 
 [JsonSerializable(typeof(OverlayConfigData[]), GenerationMode = JsonSourceGenerationMode.Metadata)]
-partial class OverlayConfigDataContext : JsonSerializerContext
-{
-    public static readonly OverlayConfigDataContext Instance = new();
-}
+[JsonSourceGenerationOptions(AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip)]
+partial class OverlayConfigDataContext : JsonSerializerContext;
 
 internal class HexLongConverter : JsonConverter<long>
 {

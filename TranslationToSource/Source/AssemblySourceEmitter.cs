@@ -18,6 +18,9 @@ internal class AssemblySourceEmitter
             case BytesInstruction bytesInstruction:
                 return Emit(bytesInstruction);
 
+            case HalfWordsInstruction halfWordInstruction:
+                return Emit(halfWordInstruction);
+
             case WordsInstruction wordInstruction:
                 return Emit(wordInstruction);
 
@@ -48,6 +51,11 @@ internal class AssemblySourceEmitter
     public string Emit(BytesInstruction bytesInstruction)
     {
         return $".byte {string.Join(", ", bytesInstruction.Bytes)}";
+    }
+
+    public string Emit(HalfWordsInstruction halfWordsInstruction)
+    {
+        return $".halfword {string.Join(", ", halfWordsInstruction.Values.Select(v => $"0x{v:X4}"))}";
     }
 
     public string Emit(WordsInstruction wordsInstruction)

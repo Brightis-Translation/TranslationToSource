@@ -9,7 +9,7 @@ namespace TranslationToSource.Patchers;
 
 internal class OverlayIntroPatcher : OverlayPatcher
 {
-    public async Task<string?> Patch(ISheetManager sheet, OverlayConfigData overlayConfig)
+    public override async Task<string?> Patch(ISheetManager sheet, OverlayConfigData overlayConfig)
     {
         // Create text patches
         var patcher = new OvrTextPatcher();

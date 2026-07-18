@@ -24,7 +24,7 @@ internal class OvrTranslationManager
         var ovrSheetOutput = new List<OvrSheetData>();
 
         var startCell = CellIdentifier.Parse("A2");
-        var endCell = CellIdentifier.Parse($"F{overlayConfig.SheetMaxRow}");
+        var endCell = CellIdentifier.Parse($"H{overlayConfig.SheetMaxRow}");
 
         var sheetName = overlayConfig.SheetName;
         var errorsOccurred = false;
@@ -48,24 +48,27 @@ internal class OvrTranslationManager
             {
                 var rowData = new OvrSheetData();
 
-                ParsingValues(() => rowData.Offset = long.Parse(row.Offset[2..], NumberStyles.HexNumber),
+                ParsingValues(() => rowData.Offset = long.TryParse(row.Offset[2..], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var parsedValue) ? parsedValue : 0,
                     sheetName, nameof(rowData.Offset), i, $"{row.Offset}");
 
-                ParsingValues(() => rowData.DataOffsets = [.. dataOffsets.Select(x => long.Parse(x[2..], NumberStyles.HexNumber))],
+                ParsingValues(() => rowData.DataOffsets = [.. dataOffsets.Select(x => long.TryParse(x[2..], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var parsedValue) ? parsedValue : 0)],
                     sheetName, nameof(rowData.DataOffsets), i, $"{rowData.DataOffsets}");
 
                 ParsingValues(() => rowData.PrintOffsets = printOffsets.Length <= 0
-                        ? [] : [.. printOffsets.Select(x => long.Parse(x[2..], NumberStyles.HexNumber))],
+                        ? [] : [.. printOffsets.Select(x => long.TryParse(x[2..], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var parsedValue) ? parsedValue : 0)],
                     sheetName, nameof(rowData.PrintOffsets), i, $"{rowData.PrintOffsets}");
 
-                ParsingValues(() => rowData.TextType = Enum.Parse<TextType>(row.TextType),
+                ParsingValues(() => rowData.TextType = Enum.TryParse<TextType>(row.TextType, out var parsedType) ? parsedType : null,
                     sheetName, nameof(rowData.TextType), i, $"{rowData.TextType}");
 
                 ParsingValues(() => rowData.OriginalText = row.OriginalText,
                     sheetName, nameof(rowData.OriginalText), i, $"{rowData.OriginalText}");
 
                 ParsingValues(() => rowData.TranslatedText = row.TranslatedText ?? string.Empty,
-                    sheetName, nameof(rowData.TranslatedText), i, $"{rowData.OriginalText}");
+                    sheetName, nameof(rowData.TranslatedText), i, $"{rowData.TranslatedText}");
+
+                ParsingValues(() => rowData.OverlayTextType = Enum.TryParse<OverlayTextType>(row.OverlayTextType, out var parsedType) ? parsedType : null,
+                    sheetName, nameof(rowData.OverlayTextType), i, $"{rowData.OverlayTextType}");
 
                 ovrSheetOutput.Add(rowData);
             }

@@ -11,7 +11,7 @@ internal class OverlayConfigProvider
             return Array.Empty<OverlayConfigData>();
 
         string json = File.ReadAllText("overlay_config.json");
-        OverlayConfigData[]? jsonData = JsonSerializer.Deserialize(json, OverlayConfigDataContext.Instance.OverlayConfigDataArray);
+        OverlayConfigData[]? jsonData = JsonSerializer.Deserialize(json, OverlayConfigDataContext.Default.OverlayConfigDataArray);
             
         if (jsonData == null)
             return Array.Empty<OverlayConfigData>();
