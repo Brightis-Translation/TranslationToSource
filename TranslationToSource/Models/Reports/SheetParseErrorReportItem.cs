@@ -4,6 +4,6 @@ record SheetParseErrorReportItem(string SheetName, string ColumnName, int Row, s
 {
     public override string Serialize()
     {
-        return $"Could not parse {ColumnName} with value {Value} from sheet {SheetName} row {Row}";
+        return $"Could not parse {ColumnName} with value '{Value}' from sheet {SheetName} row {Row}";
     }
 }

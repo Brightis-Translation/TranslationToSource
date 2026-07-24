@@ -7,12 +7,7 @@ namespace TranslationToSource.Sheets;
 
 internal class OAuth2TokenStorage : IOAuth2TokenStorage
 {
-    private TokenStorageData? _data;
-
-    public OAuth2TokenStorage()
-    {
-        _data = Initialize();
-    }
+    private TokenStorageData? _data = Initialize();
 
     public Scope? GetScope() => _data?.Scope;
 

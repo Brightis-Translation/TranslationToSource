@@ -8,15 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="GoogleSheetsApiV4">
-      <HintPath>Libs\GoogleSheetsApiV4.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleSheetsApiV4.Contract">
-      <HintPath>Libs\GoogleSheetsApiV4.Contract.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="overlay_config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -26,6 +17,15 @@
     <Content Include="config.json.user" Condition="Exists('config.json.user')">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GoogleSheetsApiV4">
+      <HintPath>Libs\GoogleSheetsApiV4.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleSheetsApiV4.Contract">
+      <HintPath>Libs\GoogleSheetsApiV4.Contract.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

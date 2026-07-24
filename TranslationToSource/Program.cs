@@ -1,9 +1,7 @@
 ﻿using GoogleSheetsApiV4;
 using GoogleSheetsApiV4.Contract;
 using GoogleSheetsApiV4.Contract.DataClasses;
-using TranslationToSource;
 using TranslationToSource.Config;
-using TranslationToSource.Models;
 using TranslationToSource.Models.Sheets;
 using TranslationToSource.Patchers;
 using TranslationToSource.Sheets;
@@ -18,7 +16,7 @@ if (args.Length > 0 && args[0] == "-h")
 
 // Access google sheet
 IOAuth2TokenStorage tokenStorage = new OAuth2TokenStorage();
-ICodeFlowManager codeFlow = OAuth2CodeFlowManager.Create(Scope.Write, ConfigManager.Instance.GetClientId(), ConfigManager.Instance.GetClientSecret(), tokenStorage);
+ICodeFlowManager codeFlow = OAuth2CodeFlowManager.Create(Scope.Read, ConfigManager.Instance.GetClientId(), ConfigManager.Instance.GetClientSecret(), tokenStorage);
 ISheetManager sheet = GoogleApiConnector.Instance.CreateSheetManager(ConfigManager.Instance.GetSheetId(), codeFlow);
 
 foreach (OverlayConfigData config in OverlayConfigProvider.GetConfigs())
