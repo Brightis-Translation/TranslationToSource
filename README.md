@@ -7,13 +7,14 @@ It's a command line tool, that needs a bit of setup and can only be executed one
 ## Usage
 
 ```text
-TranslationToSource.exe -s [sheetId] -ci [clientId] -cs [clientSecret]
+Windows: TranslationToSource.exe
+Linux [via wine]: wine TranslationToSource.exe
 ```
 
 1. The `sheetId` for this project is `16ST1GpUGnfzQkkyA7Y5LqPaeRHxq0L23jmVaQDX_wBU`.
-2. The `clientId` and `clientSecret` are an authentication pair that represents a user, who has reading rights to the google sheet. You have to provide that authentication pair yourself for your own user.
-3. Use the redirect uri `http://localhost:6001/` for this authentication pair. They must match. You can set it for the authentication pair somewhere in the google developer console.
-4. You also have to set up the `overlay_config.json` to include all the overlays you want to fetch from the google sheet and convert to `.asm` patch files. The tool comes with `OVR_008` and `OVR_041` already set up.
+2. Create a new project within <https://console.cloud.google.com>, go to "Clients", Create a new client as a "Desktop App".  This will give you the a `clientId` and `clientSecret`.
+4. Add the `sheetId`, `clientId`, and `clientSecret` from the steps 1 & 2 to the `config.json`.
+5. You also have to set up the `overlay_config.json` to include all the overlays you want to fetch from the google sheet and convert to `.asm` patch files.
 
 ## Configuration
 
@@ -34,7 +35,7 @@ This **NEW** overlay is used like an extension of an actual overlay. So, despite
 ### Output
 
 If successful, TranslationToSource will generate the patches into 2 asm files that will be used in [ARMips](https://github.com/Kingcom/armips).
-
+Please note: if any errors are detected on a sheet, the patches for __that sheet__ WILL be skipped ENTIRELY.
 
 ### Test out the exe locally
 
