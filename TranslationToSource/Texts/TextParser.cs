@@ -150,6 +150,12 @@ internal class TextParser
         if (text[position] < 0x20)
             return null;
 
+        if (text[position] is '\\')
+        {
+            length = 2;
+            position++;
+        }
+
         return new FontCharacterData
         {
             Character = text[position]

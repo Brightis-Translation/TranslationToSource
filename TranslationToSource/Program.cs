@@ -9,12 +9,9 @@ using TranslationToSource.Patchers;
 using TranslationToSource.Sheets;
 
 // Parse options
-var optionsParser = new OptionsParser();
-ParsedOptions options = optionsParser.Parse(args);
-
-if (options.IsHelp)
+if (args.Length > 0 && args[0] == "-h")
 {
-    Console.WriteLine("This tool takes translation from the Brightis Google Spreadsheet and emits them as assembly patches.");
+    Console.WriteLine("This tool takes translations from the Brightis Google Spreadsheet and emits them as assembly patches.");
     Console.WriteLine("Set sheet ID and authentication information in config.json or config.json.user.");
     return;
 }
