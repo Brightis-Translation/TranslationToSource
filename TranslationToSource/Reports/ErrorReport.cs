@@ -93,7 +93,7 @@ public class ErrorReport
 
     private static string CreateReportFile()
     {
-        string reportName = Path.Combine($"reports\\errors_{DateTime.UtcNow:YYYY_MM_ddTHH_mm_ss_fff}.txt");
+        string reportName = Path.Combine($"reports\\errors_{DateTime.UtcNow:yyyy_MM_ddTHH_mm_ss_fff}.txt");
         string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, reportName);
 
         string? reportDirectory = Path.GetDirectoryName(reportPath);

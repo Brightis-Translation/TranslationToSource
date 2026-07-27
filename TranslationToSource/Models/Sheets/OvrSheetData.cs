@@ -2,6 +2,7 @@
 
 internal class OvrSheetData
 {
+    public required string Name { get; set; }
     public long Offset { get; set; }
     public long[]? DataOffsets { get; set; }
     public long[]? PrintOffsets { get; set; }

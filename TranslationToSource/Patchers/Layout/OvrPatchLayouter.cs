@@ -45,8 +45,8 @@ internal class OvrPatchLayouter
             }
         }
 
-        // if (textPatches.Count > 0)
-        //     return null;
+        if (textPatches.Count > 0)
+            return null;
 
         return new OvrPatchLayoutData
         {

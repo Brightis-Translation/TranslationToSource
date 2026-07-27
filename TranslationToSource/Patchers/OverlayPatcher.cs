@@ -36,8 +36,6 @@ internal class OverlayPatcher
 
         // Emit patch source
         var sourceEmitter = new OverlayTextAssemblySourceEmitter();
-        //var sourceEmitter = new OverlayInlineAssemblySourceEmitter();
-        //var sourceEmitter = new OverlayPointerAssemblySourceEmitter();
         string source = sourceEmitter.EmitTextPatchSource(layout, $"OVR\\{overlayConfig.OverlaySlot:000}.bin");
 
         return source;

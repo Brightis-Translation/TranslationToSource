@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using TranslationToSource.Models.Patchers.Layout;
+using TranslationToSource.Models.Reports;
 using TranslationToSource.Models.Sheets;
 using TranslationToSource.Models.Source;
 using TranslationToSource.Models.Source.Instructions;
+using TranslationToSource.Reports;
 
 namespace TranslationToSource.Source;
 
@@ -22,6 +24,8 @@ internal class OverlayTextAssemblySourceEmitter : PsxAssemblySourceEmitter
 
         foreach (OvrTextPatchLayoutData textPatch in patchLayout.TextPatches)
         {
+            ErrorReport.Instance.EnterSection($"OverlayTextAssemblySourceEmitter Sheet {textPatch.Patch.SheetData.Name}");
+
             // Patch data offset instructions
             foreach (long dataOffset in textPatch.Patch.SheetData.DataOffsets)
             {
@@ -32,7 +36,22 @@ internal class OverlayTextAssemblySourceEmitter : PsxAssemblySourceEmitter
                 {
                     case OverlayTextType.Inline:
                         // Patches addiu immediate value without changing registers and conditions
-                        pointerPatchSource = Emit(new HalfWordsInstruction([(short)(textPatch.Offset - 0x80160000)]));
+                        var patchedRelativeOffset = textPatch.Offset & 0xFFFF;
+                        var patchedAddressHalf = patchedRelativeOffset >= 0x8000;
+                        var relativeOffset = patchedAddressHalf ? patchedRelativeOffset : patchedRelativeOffset - 0x10000;
+
+                        pointerPatchSource = Emit(new HalfWordsInstruction([(short)relativeOffset]));
+
+                        var originalRelativeOffset = dataOffset & 0xFFFF;
+                        var originalAddressHalf = originalRelativeOffset >= 0x8000;
+
+                        if (patchedAddressHalf != originalAddressHalf)
+                        {
+                            var reportItem = new AddressOverflowReportItem(dataOffset, originalAddressHalf, patchedAddressHalf);
+
+                            ErrorReport.Instance.AddReportItem(reportItem);
+                            ConsoleReport.Instance.WriteReportItem(reportItem);
+                        }
                         break;
 
                     case OverlayTextType.Pointer:
@@ -55,6 +74,9 @@ internal class OverlayTextAssemblySourceEmitter : PsxAssemblySourceEmitter
                 result.AppendLine($"\t{Emit(instruction)}");
 
             result.AppendLine();
+
+            ErrorReport.Instance.ExitSection();
+            ErrorReport.Instance.Persist();
         }
 
         result.Append(Emit(new CloseInstruction()));

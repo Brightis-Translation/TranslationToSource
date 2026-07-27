@@ -46,7 +46,7 @@ internal class OvrTranslationManager
 
             try
             {
-                var rowData = new OvrSheetData();
+                var rowData = new OvrSheetData { Name = overlayConfig.SheetName };
 
                 ParsingValues(() => rowData.Offset = long.TryParse(row.Offset[2..], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var parsedValue) ? parsedValue : 0,
                     sheetName, nameof(rowData.Offset), i + 2, $"{row.Offset}");
