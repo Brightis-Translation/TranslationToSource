@@ -1,7 +1,7 @@
 [ 
   {
     "SheetName": "OVR_000",
-    "SheetMaxRow": 12,
+    "SheetMaxRow": 13,
     "OverlaySlot": 0,
     "OverlayLength": "0x71D7",
     "OverlayType": 2,
@@ -28,7 +28,7 @@
   },
   {
     "SheetName": "OVR_003",
-    "SheetMaxRow": 13,
+    "SheetMaxRow": 14,
     "OverlaySlot": 3,
     "OverlayLength": "0x6273",
     "OverlayType": 2,
@@ -110,7 +110,7 @@
   },
   {
     "SheetName": "OVR_012",
-    "SheetMaxRow": 61,
+    "SheetMaxRow": 63,
     "OverlaySlot": 12,
     "OverlayLength": "0x64F5",
     "OverlayType": 2,
@@ -137,7 +137,7 @@
   },
   {
     "SheetName": "OVR_016",
-    "SheetMaxRow": 4,
+    "SheetMaxRow": 7,
     "OverlaySlot": 16,
     "OverlayLength": "0x6A87",
     "OverlayType": 2,
@@ -155,7 +155,7 @@
   },
   {
     "SheetName": "OVR_018",
-    "SheetMaxRow": 14,
+    "SheetMaxRow": 15,
     "OverlaySlot": 18,
     "OverlayLength": "0x71EF",
     "OverlayType": 2,
@@ -236,7 +236,7 @@
   },
   {
     "SheetName": "OVR_031",
-    "SheetMaxRow": 14,
+    "SheetMaxRow": 15,
     "OverlaySlot": 31,
     "OverlayLength": "0x5455",
     "OverlayType": 2,
@@ -254,7 +254,7 @@
   },
   {
     "SheetName": "OVR_033",
-    "SheetMaxRow": 10,
+    "SheetMaxRow": 11,
     "OverlaySlot": 33,
     "OverlayLength": "0x3675",
     "OverlayType": 2,
@@ -263,7 +263,7 @@
   },
   {
     "SheetName": "OVR_034",
-    "SheetMaxRow": 7,
+    "SheetMaxRow": 8,
     "OverlaySlot": 34,
     "OverlayLength": "0x49DD",
     "OverlayType": 2,
@@ -272,7 +272,7 @@
   },
   {
     "SheetName": "OVR_035",
-    "SheetMaxRow": 5,
+    "SheetMaxRow": 7,
     "OverlaySlot": 35,
     "OverlayLength": "0x63F8",
     "OverlayType": 2,
@@ -308,7 +308,7 @@
   },
   {
     "SheetName": "OVR_040",
-    "SheetMaxRow": 18,
+    "SheetMaxRow": 19,
     "OverlaySlot": 40,
     "OverlayLength": "0x631D",
     "OverlayType": 2,
@@ -434,7 +434,7 @@
   },
   {
     "SheetName": "OVR_055",
-    "SheetMaxRow": 4,
+    "SheetMaxRow": 5,
     "OverlaySlot": 55,
     "OverlayLength": "0x5AE7",
     "OverlayType": 2,
@@ -443,7 +443,7 @@
   },
   {
     "SheetName": "OVR_056",
-    "SheetMaxRow": 13,
+    "SheetMaxRow": 14,
     "OverlaySlot": 56,
     "OverlayLength": "0x9B7",
     "OverlayType": 2,
@@ -452,7 +452,7 @@
   },
   {
     "SheetName": "OVR_058",
-    "SheetMaxRow": 19,
+    "SheetMaxRow": 22,
     "OverlaySlot": 58,
     "OverlayLength": "0x1493",
     "OverlayType": 2,
@@ -473,6 +473,15 @@
     "SheetMaxRow": 22,
     "OverlaySlot": 60,
     "OverlayLength": "0x2BBF",
+    "OverlayType": 2,
+    "OverlayTextType": 0,
+    "UseUnlimitedSpace": false
+  }
+  {
+    "SheetName": "OVR_061",
+    "SheetMaxRow": 40,
+    "OverlaySlot": 61,
+    "OverlayLength": "0x52EF",
     "OverlayType": 2,
     "OverlayTextType": 0,
     "UseUnlimitedSpace": false
